@@ -1,0 +1,49 @@
+<!--
+
+<p>blank blank</p>
+
+<form accept-charset="UTF-8" action= "/users" method = "post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="user[username]"><br><br>
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="user[email]"><br><br>
+    <label for="password_digest">Password:</label>
+    <input type="text" id="password_digest" name="user[password_digest]"><br><br>
+    <input type="submit" value="Submit">
+    
+    
+</form>
+
+-->
+<!--
+<%= form_tag('/users') do -%>
+    <%= label_tag(:username, "Username:") %>
+    <%= text_field_tag(:username) %><br><br>
+    <%= label_tag(:email, "Email:") %>
+    <%= text_field_tag(:email) %><br><br>
+    <%= label_tag(:password_digest, "Password:") %>
+    <%= password_field_tag(:password_digest) %><br><br>
+    <%= submit_tag("Submit Form") %>
+<% end %>
+
+-->
+
+<%= form_for @user do |f| %>
+<% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> Please fix the following</h2>
+
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+      <% end %>
+  Username: <%= f.text_field :username, placeholder: "Your username here"%><br />
+  Email: <%= f.text_field :email ,placeholder: "example@example.com"%><br />
+  Password: <%= f.password_field :password_digest, placeholder: "Enter password"  %><br />
+  <%= f.submit %>
+<% end %>
+  
+  
